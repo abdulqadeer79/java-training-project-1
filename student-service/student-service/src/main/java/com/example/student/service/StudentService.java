@@ -5,8 +5,7 @@ import com.example.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +44,27 @@ public class StudentService {
         return studentRepository.findStudentByTeacherId(teacherId);
     }
 
-    public List<Student> findStudentByDateOfBirth(Date dateOfBirth) {
-        return studentRepository.findStudentByDateOfBirth(dateOfBirth);
+    public List<Student> findStudentAfterADateOfBirth(Date dateOfBirth) {
+        List<Student> studentList = studentRepository.findAll();
+        List<Student> newStudentList = new ArrayList<>();
+        for (Student s: studentList) {
+            if (dateOfBirth.before(s.getDateOfBirth())) {
+                newStudentList.add(s);
+            }
+        }
+        System.out.println(newStudentList);
+        return newStudentList;
+    }
+
+    public List<Student> findStudentBeforeADateOfBirth(Date dateOfBirth) {
+        List<Student> studentList = studentRepository.findAll();
+        List<Student> newStudentList = new ArrayList<>();
+        for (Student s: studentList) {
+            if (dateOfBirth.after(s.getDateOfBirth())) {
+                newStudentList.add(s);
+            }
+        }
+        System.out.println(newStudentList);
+        return newStudentList;
     }
 }

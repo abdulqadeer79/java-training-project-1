@@ -25,7 +25,5 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query(value = FIND_STUDENT_BY_TEACHER_ID_QUERY, nativeQuery = true)
     public List<Student> findStudentByTeacherId(@Param("teacherId") int teacherId);
 
-    @Query(value = FIND_STUDENT_BY_DATE_OF_BIRTH_QUERY, nativeQuery = true)
-    public List<Student> findStudentByDateOfBirth(@Param("dateOfBirth") Date dateOfBirth);
 }
 

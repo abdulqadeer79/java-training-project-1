@@ -85,9 +85,15 @@ public class StudentController {
     }
 
 
-    @GetMapping(value = "/date/")
-    public ResponseEntity<List<Student>> findStudentByDateOfBirth(@DateTimeFormat(pattern = "dd:MM:yyyy") @RequestParam(value = "date") Date dateOfBirth) {
-        List<Student> studentList = studentService.findStudentByDateOfBirth(dateOfBirth);
+    @GetMapping(value = "/date/before")
+    public ResponseEntity<List<Student>> findStudentBeforeADateOfBirth(@DateTimeFormat(pattern = "dd:MM:yyyy") @RequestParam(value = "date") Date dateOfBirth) {
+        List<Student> studentList = studentService.findStudentBeforeADateOfBirth(dateOfBirth);
+        return new ResponseEntity<List<Student>>(studentList, HttpStatus.FOUND);
+    }
+
+    @GetMapping(value = "/date/after")
+    public ResponseEntity<List<Student>> findStudentAfterADateOfBirth(@DateTimeFormat(pattern = "dd:MM:yyyy") @RequestParam(value = "date") Date dateOfBirth) {
+        List<Student> studentList = studentService.findStudentAfterADateOfBirth(dateOfBirth);
         return new ResponseEntity<List<Student>>(studentList, HttpStatus.FOUND);
     }
 
