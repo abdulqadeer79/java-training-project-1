@@ -6,8 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -24,4 +22,5 @@ public class Teacher {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd:MM:yyyy")
     @Temporal(TemporalType.DATE)
     private Date dateOfJoining;
+    private boolean active;
 }

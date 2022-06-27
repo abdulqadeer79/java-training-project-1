@@ -71,8 +71,12 @@ public class TeacherController {
     // DELETE methods
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteTeacherById(@PathVariable int id) {
-        teacherService.deleteTeacherById(id);
-        return new ResponseEntity<String>("Teacher deleted", HttpStatus.OK);
+        boolean isDeleted = teacherService.deleteTeacherById(id);
+        if (isDeleted) {
+            return new ResponseEntity<String>("Teacher deleted", HttpStatus.OK);
+        }
+        return new ResponseEntity<String>("No Teacher found", HttpStatus.NOT_FOUND);
+
     }
 
 }

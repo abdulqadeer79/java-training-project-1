@@ -44,20 +44,17 @@ public class StudentController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-
     @GetMapping("/all")
     public ResponseEntity<List<Student>> findAllStudents() {
         List<Student> studentList = studentService.findAllStudents();
         return new ResponseEntity<List<Student>>(studentList, HttpStatus.OK);
     }
 
-
     @GetMapping("/age/{age}")
     public ResponseEntity<List<Student>> findStudentByAge(@PathVariable int age) {
         List<Student> studentList = studentService.findStudentByAge(age);
         return new ResponseEntity<List<Student>>(studentList, HttpStatus.FOUND);
     }
-
 
     @GetMapping("/hobby/{hobby}")
     public ResponseEntity<List<Student>> findStudentByHobby(@PathVariable String hobby) {
@@ -83,7 +80,6 @@ public class StudentController {
         studentTeacherResponseVO.teacherList = teacherList;
         return new ResponseEntity<StudentTeacherResponseVO>(studentTeacherResponseVO, HttpStatus.OK);
     }
-
 
     @GetMapping(value = "/date/before")
     public ResponseEntity<List<Student>> findStudentBeforeADateOfBirth(@DateTimeFormat(pattern = "dd:MM:yyyy") @RequestParam(value = "date") Date dateOfBirth) {

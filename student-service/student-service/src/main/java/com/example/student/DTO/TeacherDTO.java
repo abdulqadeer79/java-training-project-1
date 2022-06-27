@@ -5,7 +5,6 @@ import lombok.Data;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 

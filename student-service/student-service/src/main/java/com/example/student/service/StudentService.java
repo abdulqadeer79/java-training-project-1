@@ -41,7 +41,7 @@ public class StudentService {
     }
 
     public List<Student> findStudentByTeacherId(int teacherId) {
-        return studentRepository.findStudentByTeacherId(teacherId);
+        return studentRepository.findByTeacherId(teacherId);
     }
 
     public List<Student> findStudentAfterADateOfBirth(Date dateOfBirth) {

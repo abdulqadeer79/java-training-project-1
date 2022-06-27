@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TeacherService {
@@ -15,23 +16,38 @@ public class TeacherService {
     private TeacherRepository teacherRepository;
 
     public Teacher createAndUpdateTeacher(Teacher teacher) {
+        teacher.setActive(true);
         return teacherRepository.save(teacher);
     }
 
     public List<Teacher> findAllTeachers() {
-        return teacherRepository.findAll();
+
+        return teacherRepository.findAll()
+                .stream()
+                .filter(Teacher::isActive)
+                .collect(Collectors.toList());
     }
 
     public Optional<Teacher> findTeacherById(int id) {
-        return teacherRepository.findById(id);
+        if (teacherRepository.findTeacherById(id).isActive()){
+            return teacherRepository.findById(id);
+        }
+        return Optional.empty();
     }
 
     public Teacher findTeacherByName(String name) {
         return teacherRepository.findTeacherByName(name);
     }
 
-    public void deleteTeacherById(int id) {
-        teacherRepository.deleteById(id);
+    public boolean deleteTeacherById(int id) {
+        Teacher teacher = teacherRepository.findTeacherById(id);
+        boolean isDeleted = false;
+        if ((teacher != null) && (teacher.isActive())) {
+            isDeleted = true;
+            teacher.setActive(false);
+            teacherRepository.save(teacher);
+        }
+        return isDeleted;
     }
 
     public List<Teacher> findTeacherByAgeAndSubject(int age, String subject) {
